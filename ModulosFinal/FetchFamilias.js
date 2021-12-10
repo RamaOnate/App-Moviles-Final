@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
     familyViewContainer: {
         justifyContent: 'center',
         alignItems: 'center',
+        height: '90%',
     },
     plusSign: {
         fontSize: 35,
