@@ -11,16 +11,13 @@ import {
     TextInput
 } from 'react-native';
 
-export function BusinessCard (props) {
-
-    useEffect(() => {
-        console.log('Props vale: '+JSON.stringify(props));
-    }, [])
+export function RealmCarta (props) {
 
     return (
         <View style={styles.deleteButton}>
             <View style={styles.businessCard}>
-                <Text>Owner: {props.name}</Text>
+                <Text>Owner: {props.owner}</Text>
+                <Text>Id: {props.id}</Text>
             </View>
             <TouchableWithoutFeedback onPress={() => props.deleteCard(props.id)}>
                 <Text>X</Text>
