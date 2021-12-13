@@ -11,34 +11,38 @@ import {
     TextInput
 } from 'react-native';
 
-export function StopWatch () {
+let padToTwo = (number) => (number <= 9 ? `0${number}`: number);
+
+export function StopWatch ({navigation}) {
 
     const [hours, setHours] = useState(0);
     const [minutes, setMinutes] = useState(0);
     const [seconds, setSeconds] = useState(0);
-    const [milliseconds, setMilliseconds] = useState(0);
     const [isRunning, setIsRunning] = useState(false);
 
-    // Need to add one milisecond to the time
+    // useEffect for stopwatch
     useEffect(() => {
+        let interval = null;
         if (isRunning) {
-            setTimeout(() => {
-                setMilliseconds(milliseconds + 1);
-                if (milliseconds > 999) {
-                    setMilliseconds(0);
+            interval = setInterval(() => {
+                if(seconds + 1 == 60) {
+                    setSeconds(0);
+                    if(minutes + 1 == 60) {
+                        setMinutes(0);
+                        setHours(hours + 1);
+                    } else {
+                        setMinutes(minutes + 1);
+                    }
+                } else {
                     setSeconds(seconds + 1);
                 }
-                if (seconds > 59) {
-                    setSeconds(0);
-                    setMinutes(minutes + 1);
-                }
-                if (minutes > 59) {
-                    setMinutes(0);
-                    setHours(hours + 1);
-                }
-            }, 1);
+
+            }, 1000);
+        } else if (!isRunning && seconds !== 0) {
+            clearInterval(interval);
         }
-    }, [isRunning, milliseconds, seconds, minutes, hours]);
+        return () => clearInterval(interval);
+    }, [isRunning, seconds]);
 
     const startWatch = () => {
         setIsRunning(true);
@@ -52,14 +56,15 @@ export function StopWatch () {
         setHours(0);
         setMinutes(0);
         setSeconds(0);
-        setMilliseconds(0);
     };
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>StopWatch</Text>
+            <Text style={styles.title}>Temporizador</Text>
             <View style={styles.stopWatch}>
-                    <Text style={styles.time}>{hours}:{minutes}:{seconds}.{milliseconds}</Text>
+                <Text style={styles.time}>{padToTwo(hours) + ':'}</Text>
+                <Text style={styles.time}>{padToTwo(minutes) + ':'}</Text>
+                <Text style={styles.time}>{padToTwo(seconds)}</Text>
             </View>       
             <View style={styles.buttons}>             
                 <TouchableWithoutFeedback onPress={() => startWatch()} disabled={isRunning}>
@@ -96,18 +101,21 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     stopWatch: {
-        width: 200,
-        height: 200,
-        borderRadius: 100,
+        width: 250,
+        height: 250,
+        borderRadius: 300,
         borderWidth: 5,
         borderColor: 'green',
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
+        flexDirection: 'row',   
     },
     time: {
-        fontSize: 20,
+        fontSize: 30,
         fontWeight: 'bold',
+        width: 60,
+        textAlign: 'center',
     },
     button: {
         fontSize: 20,

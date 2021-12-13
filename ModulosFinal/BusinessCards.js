@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import { BusinessCard } from "./BusinessCard";
 
-export function BusinessCards () {
+export function BusinessCards ({navigation}) {
 
     const [cards, setCards] = useState([]);
     const [inputText, setInputText] = useState();

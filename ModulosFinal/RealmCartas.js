@@ -27,7 +27,7 @@ const CartaSchema = {
 // This implementation does not keep a good track of the IDs.
 // it is just to show status keeps when you restart phone.
 
-export function RealmCartas () {
+export function RealmCartas ({navigation}) {
 
     const [cards, setCards] = useState([]);
     const [inputText, setInputText] = useState();

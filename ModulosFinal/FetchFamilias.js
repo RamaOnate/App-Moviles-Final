@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { TarjetaFamilia } from './TarjetaFamilia';
 
-export function FetchFamilias () {
+export function FetchFamilias ({navigation}) {
     
     const [familias, setFamilias] = useState([]);
     const [limit, setLimit] = useState(2);

@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import MapView, {Marker} from "react-native-maps";
 
-export function Mapa () {
+export function Mapa ({navigation}) {
 
     return (
         <View style={styles.mapContainer}>
