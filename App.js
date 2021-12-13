@@ -10,6 +10,7 @@ import { Mapa } from "./ModulosFinal/Mapa";
 import { StopWatch } from "./ModulosFinal/StopWatch";
 import { RealmCartas } from "./ModulosFinal/RealmCartas";
 import { Redux } from "./ModulosFinal/Redux";
+import { Menu } from "./ModulosFinal/Menu";
 
 export default function App() {
   
@@ -19,6 +20,7 @@ export default function App() {
 
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen name="Menu" component={Menu} />
         <Stack.Screen name="FetchFamilias" component={FetchFamilias}/>
         <Stack.Screen name="Cartas" component={Cartas}/>
         <Stack.Screen name="BusinessCards" component={BusinessCards}/>
@@ -28,13 +30,7 @@ export default function App() {
         <Stack.Screen name="Redux" component={Redux}/>
       </Stack.Navigator>
     </NavigationContainer>
-    //<FetchFamilias/>
-    //<Cartas/>
-    //<BusinessCards/>
-    //<StopWatch/>
-    //<Mapa/>
-    //<RealmCartas/>
-    //<Redux/>
+    
   );
 
 }
